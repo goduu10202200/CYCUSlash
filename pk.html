@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>pk</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/pk.css">
     <script src="question.js"></script>
@@ -14,117 +15,119 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <script>
-    function getArgs() {
-        var args = new Object();
-        var query = location.search.substring(1);
-        var pairs = query.split("&");
-        for (var i = 0; i < pairs.length; i++) {
-            var pos = pairs[i].indexOf("=");
-            if (pos == -1) continue;
-            var argname = pairs[i].substring(0, pos);
-            var value = pairs[i].substring(pos + 1);
-            args[argname] = decodeURIComponent(value);
+
+    function open_dialog(action) {
+        switch (action) {
+            case "bag":
+                document.getElementById("dialog_content").innerHTML = "你/妳的背包空空如也。";
+                document.getElementById("btn_dialog").value = "返回戰鬥";
+                break;
+            case "run":
+                document.getElementById("dialog_content").innerHTML = "逃跑並不是解決辦法。";
+                document.getElementById("btn_dialog").value = "還是腳踏實地面對戰鬥吧！";
+                break;
+            case "partner":
+                document.getElementById("dialog_content").innerHTML = "別想了，你/妳沒有夥伴。";
+                document.getElementById("btn_dialog").value = "繼續獨自奮戰QQ";
+                break;
+            default:
+                document.getElementById("dialog_content").innerHTML = "還是腳踏實地，繼續戰鬥吧。";
+                document.getElementById("btn_dialog").value = "好";
         }
-        return args;
     }
-    var args = getArgs();
-    //document.getElementById("img_role").attributes("src") = "images/" + args.role + ".png";
 </script>
 
 <body>
-    <div class="pk_div">
-        <div class="pk_my">
-            <img id="my_role" src="images/pika_back.png" />
-            <img id="my_floor" src="images/floor.png" />
-        </div>
-        <div class="pk_bear">
-            <img id="bear_role" src="images/bear.png" />
-            <img id="bear_floor" src="images/floor.png" />
-        </div>
-        <!-- <div class="result_div">
-            <img id="result_role" src="images/bear_fail.png"/>
-            <img id="result_floor" src="images/floor.png"/>
-        </div> -->
-        <img id="bear_blood" src="images/bear_hp100.png" />
-        <img id="my_blood" src="images/pika_hp100.png" />
-    </div>
-    <section id="showdata">
-        <!-- <div class="depiction">
-            <div class="content">
-                糟糕！看來是個難纏的對手。<br/>
-                看來是甩不掉他了......
+    <div id="showdata">
+        <div class="pk_div">
+            <div class="pk_bear">
+                <img id="bear_role" src="images/bear.png" />
+                <img id="bear_floor" src="images/floor.png" />
             </div>
-        </div> -->
-        <div class="question">
-            <div class="content">
-                <!-- 你為什麼要修習學程呢？ -->
-                {{ question }}
+            <div class="pk_my">
+                <img v-if="role=='pika'" id="my_role" src="images/pika_back.png" />
+                <img v-if="role=='miao'" id="my_role" src="images/miao_back.png" />
+                <img id="my_floor" src="images/floor.png" />
             </div>
+            <img id="bear_blood" src="images/bear_hp100.png" />
+            <img v-if="role=='pika'" id="my_blood" src="images/pika_hp100.png" />
+            <img v-if="role=='miao'" id="my_blood" src="images/miao_hp100.png" />
         </div>
-        <div class="option">
-            <div class="content">
-                <table>
-                    <tr v-for="(item, index) in answer">
-                        <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==0">A. {{item}}
-                        </td>
-                        <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==1">B. {{item}}
-                        </td>
-                        <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==2">C. {{item}}
-                        </td>
-                        <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==3">D. {{item}}
-                        </td>
-                        <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==4">E. {{item}}
-                        </td>
-                        <td v-if="seen && item=='其他' ">
-                            <input type="text" id="input_other" v-model="other">
-                            <button style="margin-right: 20px;" class="btn btn-outline-primary btn-sm" v-bind:id="index"
-                                v-on:click="reply(id_question,index,item,1)">submit</button>
-                        </td>
-                    </tr>
-                    <!-- <tr>
-                        <td>A. 對學程有興趣。</td>
-                        <td>B. 我也不知道，好像很有趣就選了。</td>
-                    </tr>
-                    <tr>
-                        <td>C. 想修學程內的某些課程。</td>
-                        <td>D. 其他</td>
-                    </tr> -->
-                </table>
-            </div>
-        </div>
-        <div class="action">
-            <div class="content">
-                <table>
-                    <tr>
-                        <td>回答</td>
-                        <td><a href="#dialog">背包</a></td>
-                    </tr>
-                    <tr>
-                        <td>夥伴</td>
-                        <td>逃跑</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <!-- <div class="result">
-            <div class="content">
-                恭喜你成功<br/>
-                可以到大草皮逛逛學程博覽會<br/>
-                抽大獎呦~
-            </div>
-        </div> -->
-
-        <!--跳出視窗-->
-        <div id="dialog">
-            <div class="dialog_box">
-                <div class="dialog_content">
-                    你/妳的背包空空如也。
-                    <a href="#"><input type="submit" class="btn_dialog" value="確認" /></a>
+        <section>
+            <!-- <div class="depiction">
+                <div class="content">
+                    糟糕！看來是個難纏的對手。<br/>
+                    看來是甩不掉他了......
                 </div>
-                <a class="dialog_close" href="#"></a>
+            </div> -->
+            <div class="question">
+                <div class="content">
+                    <!-- 你為什麼要修習學程呢？ -->
+                    {{ question }}
+                </div>
             </div>
-        </div>
-    </section>
+            <div class="option">
+                <div class="content">
+                    <table>
+                        <tr v-for="(item, index) in answer">
+                            <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==0">A.
+                                {{item}}
+                            </td>
+                            <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==1">B.
+                                {{item}}
+                            </td>
+                            <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==2">C.
+                                {{item}}
+                            </td>
+                            <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==3">D.
+                                {{item}}
+                            </td>
+                            <td v-bind:id="index" v-on:click="reply(id_question,index,item)" v-if="index==4">E.
+                                {{item}}
+                            </td>
+                            <td v-if="seen && item=='其他' " class="other_text">
+                                <input type="text" id="input_other" v-model="other">
+                                <button v-bind:id="index" v-on:click="reply(id_question,index,item,1)">送出</button>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td>A. 對學程有興趣。</td>
+                            <td>B. 我也不知道，好像很有趣就選了。</td>
+                        </tr>
+                        <tr>
+                            <td>C. 想修學程內的某些課程。</td>
+                            <td>D. 其他</td>
+                        </tr> -->
+                    </table>
+                </div>
+            </div>
+            <div class="action">
+                <div class="content">
+                    <table>
+                        <tr>
+                            <td>回答</td>
+                            <td><a href="#dialog" onclick="open_dialog('bag')">背包</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#dialog" onclick="open_dialog('partner')">夥伴</a></td>
+                            <td><a href="#dialog" onclick="open_dialog('run')">逃跑</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!--跳出視窗-->
+            <div id="dialog">
+                <div class="dialog_box">
+                    <div id="dialog_content">
+                        還是腳踏實地，繼續戰鬥吧。
+                    </div>
+                    <a href="#"><input type="button" id="btn_dialog" value="好" /></a>
+                    <a class="dialog_close" href="#"></a>
+                </div>
+            </div>
+        </section>
+    </div>
 </body>
 <script>
     var myJson, JSONdata
@@ -140,7 +143,9 @@
 
     var vm = new Vue({
         el: '#showdata',
+        // getURL                 => Get URL role=?
         data: {
+            role: getURL(),
             score: "",
             finish: "",
             other: "",
@@ -153,19 +158,17 @@
         methods: {
             reply: function (id_question, id_answer, item, repeat) {
                 /*
-                    getURL                 => Get URL role=?
                     SendDataAJAX    => Use axios send data to php files.
                     getNextData         =>  get next question、question.id、answer in question.js
                 */
 
                 getNextData(vm, id_question, id_answer, item, repeat);
                 if (this.finish == true) {
-                    role = getURL();
                     sessionStorage.clear();
                     SendDataAJAX(id_question, id_answer, this.other, this.id_student, this.score);
                     //Change page
                     window.location.href =
-                        './result.html?score=' + this.score + "&id_student=" + this.id_student + "&role=" + role;
+                        './result.html?score=' + this.score + "&id_student=" + this.id_student + "&role=" + this.role;
                 } else if ((item == "其他" && repeat == 1) || item != "其他") {
                     this.seen = false;
                     SendDataAJAX(id_question, id_answer, this.other, this.id_student, "");
@@ -181,7 +184,7 @@
     function SendDataAJAX(id_question, id_answer, other, id_student, score) {
         axios({
             method: 'post',
-            url: 'ajax.php',
+            url: 'backend/ajax_answer.php',
             data: {
                 score: score,
                 other: other,
@@ -191,6 +194,10 @@
             }
         })
             .then(function (response) {
+                if (response.data == "no student id") {
+                    alert("請輸入學號，跳轉到登入頁面");
+                    window.location.href = './enter.html';
+                }
                 //console.log(response.data);
             })
             .catch(function (error) {

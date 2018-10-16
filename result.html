@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>pk</title>
+    <title>result</title>
     <!--生產版本-->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/pk.css">
+    <link rel="stylesheet" href="css/result.css">
 </head>
 <script>
     function getArgs() {
@@ -32,7 +32,7 @@
 <body>
     <div id="display">
         <div class="pk_div" v-if="score>=60">
-            <div class="result_div">
+            <div class="result_div_win">
                 <img id="result_role" src="images/bear_fail.png" />
                 <img id="result_floor" src="images/floor.png" />
             </div>
@@ -52,8 +52,9 @@
         <section>
             <div class="result">
                 <div class="content">
-                    <span v-if=" score < 60">{{message_role}}， </span>
-                    {{message_student}}
+                    <span v-if=" score < 60">{{message_role}}，</span>
+                    {{message_student}}，{{message_score}}
+                    <br>
                     <br>
                     {{message}}
                 </div>
@@ -78,8 +79,9 @@
             score: "",
             message: "",
             id_student: "",
-            message_student: "",
             message_role: "",
+            message_student: "",
+            message_score: "",
         },
         methods: {
             display: function () {
@@ -95,19 +97,33 @@
                     this.message_role = "喵蛙種子已失去戰鬥能力"
                 }
                 switch (this.score) {
-                    case "0": this.message = "  加油！你的斜槓指數為 0 建議您可以去 10/31 大草坪的學程博覽會多多了解學程。參加闖關後，可抽 APPLE WATCH 哦！"
+                    case "0":
+                        this.message_score = "加油！你的斜槓指數為 0";
+                        this.message = " 建議您可以去 10/31 大草坪的學程博覽會多多了解學程。參加闖關後，可抽 APPLE WATCH 哦！"
                         break;
-                    case "50": this.message = "   太可惜了！你的斜槓分數為 50 就差一點，可以再加油！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                    case "50":
+                        this.message_score = "太可惜了！你的斜槓分數為 50";
+                        this.message = "就差一點，可以再加油！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
                         break;
-                    case "60": this.message = "   再加油喔！你的斜槓分數為 60 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                    case "60":
+                        this.message_score = "再加油喔！你的斜槓分數為 60";
+                        this.message = "同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
                         break;
-                    case "70": this.message = "   真可惜～差一點！你的斜槓分數為 70 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                    case "70":
+                        this.message_score = "真可惜～差一點！你的斜槓分數為 70";
+                        this.message = "同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
                         break;
-                    case "80": this.message = "   真可惜～差一點！你的斜槓分數為 80 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                    case "80":
+                        this.message_score = "真可惜～差一點！你的斜槓分數為 80";
+                        this.message = "同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
                         break;
-                    case "90": this.message = "   再接再厲！你的斜槓分數為 90 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                    case "90":
+                        this.message_score = "再接再厲！你的斜槓分數為 90";
+                        this.message = "同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
                         break;
-                    case "100": this.message = "   再接再厲！你的斜槓分數為 100 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                    case "100":
+                        this.message_score = "你的斜槓分數為 100";
+                        this.message = " 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
                         break;
                     default: this.message = ""
                 }

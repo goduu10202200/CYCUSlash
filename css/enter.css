@@ -91,6 +91,27 @@ section{
     cursor: pointer;
 }
 
+@media only screen and (min-width: 1920px) {
+    header img{
+        width: 45%;
+    }
+
+    .title{
+        font-size: 40px;
+    }
+    .enter_div{
+        margin-top: 2%;
+    }
+    .enter_div div{
+        font-size: 30px;
+    }
+    .go_btn{
+        height: 60px;
+        line-height: 60px;
+        font-size: 26px;
+    }
+    
+}
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     header{

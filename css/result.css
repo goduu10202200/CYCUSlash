@@ -1,0 +1,420 @@
+html, body{
+    overflow-x: hidden;
+}
+#display{
+    width: 100%;
+    height: 100%;
+}
+
+.pk_div{
+    width: 100%;
+    min-height: 400px;
+    height: 70%;
+    background-image: url('../images/fight_background.png');
+    background-size: contain;
+    position: relative;
+    z-index: -100;
+}
+
+.pk_my{
+    width: 50%;
+    height: 100%;
+    float: left;
+    position: relative;
+
+}
+.pk_my #my_role{
+    width: 300px;
+    position: absolute;
+    left: 100px;
+    bottom: -120px;
+    z-index: 1;
+    animation:my_pk_start 2s;
+    -moz-animation:my_pk_start 2s; /* Firefox */
+    -webkit-animation:my_pk_start 2s; /* Safari and Chrome */
+    -o-animation:my_pk_start 2s; /* Opera */
+}
+.pk_my #my_floor{
+    width: 400px;
+    position: absolute;
+    left: 100px;
+    bottom: -50px;
+    z-index: -1;
+    animation:my_pk_start 2s;
+    -moz-animation:my_pk_start 2s; /* Firefox */
+    -webkit-animation:my_pk_start 2s; /* Safari and Chrome */
+    -o-animation:my_pk_start 2s; /* Opera */
+}
+@keyframes my_pk_start
+{
+    0%   {left:-100px;}
+    100% {left:100px;}
+}
+
+.pk_bear{
+    width: 50%;
+    height: 100%;
+    float: right;
+    position: relative;
+}
+.pk_bear #bear_role{
+    width: 200px;
+    position: absolute;
+    top: 10px;
+    right: 180px;
+    z-index: 1;
+    animation:bear_pk_start 2s;
+    -moz-animation:bear_pk_start 2s; /* Firefox */
+    -webkit-animation:bear_pk_start 2s; /* Safari and Chrome */
+    -o-animation:bear_pk_start 2s; /* Opera */
+}
+.pk_bear #bear_floor{
+    width: 400px;
+    position: absolute;
+    top: 220px;
+    right: 70px;
+    z-index: -1;
+    animation:bear_floor_pk_start 2s;
+    -moz-animation:bear_floor_pk_start 2s; /* Firefox */
+    -webkit-animation:bear_floor_pk_start 2s; /* Safari and Chrome */
+    -o-animation:bear_floor_pk_start 2s; /* Opera */
+}
+@keyframes bear_pk_start
+{
+    0%   {right: -60px;}
+    100% {right: 180px;}
+}
+@keyframes bear_floor_pk_start
+{
+    0%   {right: -100px;}
+    100% {right: 70px;}
+}
+
+#bear_blood{
+    width: 35%;
+    min-width: 400px;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    z-index: 2;
+}
+#my_blood{
+    width: 35%;
+    min-width: 400px;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    z-index: 2;
+
+}
+
+section{
+    width: 100%;
+    min-height: 150px;
+    height: 30%;
+    background-color: rgb(51, 51, 51);
+    padding: 1%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+section > div{
+    height: 100%;
+    background-color: rgb(102, 102, 102);
+    padding: 1%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+section .content{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: rgb(246, 246, 217);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+section .result{
+    width: 100%;
+    border-radius: 8px;
+}
+section .result .content{
+    padding-left: 3%;
+    padding-top: 1%;
+    font-family: "標楷體";
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.result_div
+, .result_div_win{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /* padding-top: 20%; */
+}
+.result_div #result_role{
+    /* width: 38%; */
+    width: 500px;
+    position: absolute;
+    /* top: 80px; */
+    bottom: 10%;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: 1;
+}
+.result_div #result_floor{
+    /* width: 70%; */
+    width: 800px;
+    /* height: 38%; */
+    height: 200px;
+    position: absolute;
+    /* top: 300px; */
+    bottom: 5%;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: -1;
+}
+
+.result_div_win #result_role{
+    /* width: 38%; */
+    width: 180px;
+    position: absolute;
+    /* top: 80px; */
+    bottom: 10%;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: 1;
+}
+.result_div_win #result_floor{
+    /* width: 70%; */
+    width: 600px;
+    /* height: 38%; */
+    height: 100px;
+    position: absolute;
+    /* top: 300px; */
+    bottom: 5%;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: -1;
+}
+
+
+
+
+@media only screen and (min-width: 1920px) {   
+    section .result .content{
+        padding-left: 3%;
+        padding-top: 1%;
+        font-size: 36px;
+        line-height: 50px;
+    }
+    
+    .result_div #result_role{
+        width: 700px;
+        bottom: 15%;
+    }
+    .result_div #result_floor{
+        width: 1200px;
+        height: 350px;
+        bottom: 5%;
+    }
+
+    .result_div_win #result_role{
+        width: 320px;
+        bottom: 10%;
+    }
+    .result_div_win #result_floor{
+        width: 900px;
+        height: 150px;
+        bottom: 5%;
+    }
+    
+    
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {   
+    #bear_blood{
+        width: 60%;
+        min-width: 400px;
+        top: 30px;
+        left: 40px;
+    }
+    #my_blood{
+        width: 60%;
+        min-width: 400px;
+        bottom: 30px;
+        right: 40px;
+    }
+    
+    section .result{
+        width: 100%;
+        border-radius: 8px;
+    }
+    section .result .content{
+        padding-left: 3%;
+        padding-top: 1%;
+        font-family: "標楷體";
+        font-size: 40px;
+        line-height: 60px;
+    }
+    
+    .result_div #result_role{
+        width: 500px;
+        bottom: 40%;
+    }
+    .result_div #result_floor{
+        width: 800px;
+        height: 200px;
+        bottom: 35%;
+    }
+
+    .result_div_win #result_role{
+        width: 700px;
+        top: 30%;
+    }
+    .result_div_win #result_floor{
+        width: 1200px;
+        height: 350px;
+        top: 50%;
+    }
+    
+}
+@media only screen and (min-width: 421px) and (max-width: 768px) {
+    #bear_blood{
+        width: 35%;
+        min-width: 400px;
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        z-index: 2;
+    }
+    #my_blood{
+        width: 60%;
+        min-width: 400px;
+        bottom: 30px;
+        right: 40px;
+    }
+    
+    section .result{
+        width: 100%;
+        border-radius: 8px;
+    }
+    section .result .content{
+        padding-left: 3%;
+        padding-top: 1%;
+        font-family: "標楷體";
+        font-size: 30px;
+        line-height: 50px;
+    }
+    
+    .result_div #result_role{
+        width: 500px;
+        bottom: 35%;
+    }
+    .result_div #result_floor{
+        width: 800px;
+        height: 200px;
+        bottom: 30%;
+    }
+    
+    .result_div_win #result_role{
+        width: 700px;
+        top: 30%;
+    }
+    .result_div_win #result_floor{
+        width: 1200px;
+        height: 350px;
+        top: 50%;
+    }
+    
+}
+@media only screen and (min-width: 0px) and (max-width: 420px){
+    #bear_blood{
+        width: 35%;
+        min-width: 400px;
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        z-index: 2;
+    }
+    #my_blood{
+        width: 80%;
+        min-width: 200px;
+        bottom: 30px;
+        right: 40px;
+    }
+    
+    section .result{
+        width: 100%;
+        border-radius: 8px;
+    }
+    section .result .content{
+        padding-left: 3%;
+        padding-top: 1%;
+        font-family: "標楷體";
+        font-size: 20px;
+        line-height: 30px;
+    }
+    
+    .result_div #result_role{
+        width: 300px;
+        bottom: 45%;
+    }
+    .result_div #result_floor{
+        width: 600px;
+        height: 200px;
+        bottom: 30%;
+    }
+
+}
+
+
+
+
+
+
+.rwd-table {
+    background: #fff;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    min-width: 100%;
+}
+    
+.rwd-table td {
+    margin: 0.5em 1em;
+    display: block;
+    text-align: left;
+    }
+    
+    .rwd-table td:before {
+    content: attr(data-th) " : ";
+    font-weight: bold;
+    width: 6.5em;
+    display: inline-block;
+    color: #D20B2A;
+    font-weight: bold;
+    }
+    
+    @media (min-width: 480px) {
+        .rwd-table td:before {
+        display: none;
+        }
+        .rwd-table td {
+        display: table-cell;
+        padding: 0.25em 0.5em;
+        padding: 1em !important;
+        }
+        .rwd-table td:first-child {
+        padding-left: 0;
+        }
+        .rwd-table td:last-child {
+        padding-right: 0;
+        }
+    }
