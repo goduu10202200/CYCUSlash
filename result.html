@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pk</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pk.css">
+</head>
+<script>
+    function getArgs() { 
+        var args = new Object(); 
+        var query = location.search.substring(1);
+        var pairs = query.split("&"); 
+        for(var i = 0; i < pairs.length ; i++) { 
+            var pos = pairs[i].indexOf("="); 
+            if (pos == -1) continue; 
+            var argname = pairs[i].substring(0,pos); 
+            var value = pairs[i].substring(pos+1); 
+            args[argname] = decodeURIComponent(value); 
+        } 
+        return args; 
+    } 
+    var args = getArgs(); 
+    //document.getElementById("img_role").attributes("src") = "images/" + args.role + ".png";
+</script>
+<body>
+    <div class="pk_div">
+        <div class="result_div">
+            <img id="result_role" src="images/bear_fail.png"/>
+            <img id="result_floor" src="images/floor.png"/>
+        </div>
+        <img id="bear_blood" src="images/bear_hp100.png"/>
+        <img id="my_blood" src="images/pika_hp100.png"/>
+    </div>
+    <section>
+        <div class="result">
+            <div class="content">
+                恭喜你成功<br/>
+                可以到大草皮逛逛學程博覽會<br/>
+                抽大獎呦~
+            </div>
+        </div>
+    </section>
+</body>
+</html>

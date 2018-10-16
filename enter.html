@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>enter</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/enter.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--生產版本-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <header>
+        <img src="images/logo.png" />
+    </header>
+    <section id="login">
+        <div class="title">
+            神奇斜槓大冒險
+        </div>
+        <div class="enter_div">
+            <div>
+                <a>系級：</a>
+                <input type="text" v-model="myclass" autofocus />
+            </div>
+            <div>
+                <a>姓名：</a>
+                <input type="text" v-model="name" autofocus />
+            </div>
+            <div>
+                <a>學號：</a>
+                <input type="text" v-model="id_student" autofocus />
+            </div>
+        </div>
+        <input type="button" class="go_btn" value="開始冒險！" v-on:click="login()" />
+    </section>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#login',
+        data: {
+            myclass: "",
+            name: "",
+            id_student: "",
+        },
+        methods: {
+            login: function () {
+                sessionStorage.setItem('id_student', this.id_student);
+                // window.sessionStorage["id_student"] = this.id_student;
+                SendDataAJAX(this.myclass, this.name, this.id_student);
+                window.location.href = './role.html';
+            },
+        }
+    })
+    //SendDataAjax
+    function SendDataAJAX(myclass, name, id_student) {
+        const params = new URLSearchParams();
+        params.append('name', name);
+        params.append('myclass', myclass);
+        params.append('id_student', id_student);
+        axios({
+            method: 'post',
+            url: 'ajax_login.php',
+            data: params
+        })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+</script>
+
+</html>

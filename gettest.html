@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--生產版本-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="display">
+        {{message}}
+        <br>
+        {{role}}
+    </div>
+</body>
+<script>
+    var strUrl = location.search;
+    var getPara, ParaVal;
+    var aryPara = [];
+
+    window.onload = function () {
+
+        vm.display();
+    }
+    var vm = new Vue({
+        el: '#display',
+        data: {
+            role: "",
+            score: "",
+            message: "",
+            id_student: "",
+        },
+        methods: {
+            display: function () {
+                var getjson = JSON.parse(getURL());
+                this.role = getjson.role;
+                this.score = getjson.score;
+                this.id_student = getjson.id_student;
+
+                switch (this.score) {
+                    case "0": this.message = this.id_student + "加油！你的斜槓指數為 0 建議您可以去 10/31 大草坪的學程博覽會多多了解學程。參加闖關後，可抽 APPLE WATCH 哦！"
+                        break;
+                    case "50": this.message = this.id_student + "太可惜了！你的斜槓分數為 50 就差一點，可以再加油！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "60": this.message = this.id_student + "再加油喔！你的斜槓分數為 60 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "70": this.message = this.id_student + "真可惜～差一點！你的斜槓分數為 70 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "80": this.message = this.id_student + "真可惜～差一點！你的斜槓分數為 80 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "90": this.message = this.id_student + "再接再厲！你的斜槓分數為 90 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "100": this.message = this.id_student + "再接再厲！你的斜槓分數為 100 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    default: this.message = ""
+                }
+            }
+        }
+    })
+
+    function getURL() {
+        id_student = "";
+        if (strUrl.indexOf("?") != -1) {
+            var getSearch = strUrl.split("?");
+            getPara = getSearch[1].split("&");
+            for (i = 0; i < getPara.length; i++) {
+                ParaVal = getPara[i].split("=");
+                aryPara.push(ParaVal[0]);
+                aryPara[ParaVal[0]] = ParaVal[1];
+            }
+        }
+        pos = {
+            role: aryPara['role'],
+            score: aryPara['score'],
+            id_student: aryPara['id_student']
+        };
+        return JSON.stringify(pos);
+    }
+
+</script>
+
+</html>
