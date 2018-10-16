@@ -165,7 +165,7 @@
                     SendDataAJAX(id_question, id_answer, this.other, this.id_student, this.score);
                     //Change page
                     window.location.href =
-                        './gettest.html?score=' + this.score + "&id_student=" + this.id_student + "&role=" + role;
+                        './result.html?score=' + this.score + "&id_student=" + this.id_student + "&role=" + role;
                 } else if ((item == "其他" && repeat == 1) || item != "其他") {
                     this.seen = false;
                     SendDataAJAX(id_question, id_answer, this.other, this.id_student, "");

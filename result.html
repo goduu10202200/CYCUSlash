@@ -1,47 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>pk</title>
+    <!--生產版本-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/pk.css">
 </head>
 <script>
-    function getArgs() { 
-        var args = new Object(); 
+    function getArgs() {
+        var args = new Object();
         var query = location.search.substring(1);
-        var pairs = query.split("&"); 
-        for(var i = 0; i < pairs.length ; i++) { 
-            var pos = pairs[i].indexOf("="); 
-            if (pos == -1) continue; 
-            var argname = pairs[i].substring(0,pos); 
-            var value = pairs[i].substring(pos+1); 
-            args[argname] = decodeURIComponent(value); 
-        } 
-        return args; 
-    } 
-    var args = getArgs(); 
+        var pairs = query.split("&");
+        for (var i = 0; i < pairs.length; i++) {
+            var pos = pairs[i].indexOf("=");
+            if (pos == -1) continue;
+            var argname = pairs[i].substring(0, pos);
+            var value = pairs[i].substring(pos + 1);
+            args[argname] = decodeURIComponent(value);
+        }
+        return args;
+    }
+    var args = getArgs();
     //document.getElementById("img_role").attributes("src") = "images/" + args.role + ".png";
 </script>
+
 <body>
-    <div class="pk_div">
-        <div class="result_div">
-            <img id="result_role" src="images/bear_fail.png"/>
-            <img id="result_floor" src="images/floor.png"/>
-        </div>
-        <img id="bear_blood" src="images/bear_hp100.png"/>
-        <img id="my_blood" src="images/pika_hp100.png"/>
-    </div>
-    <section>
-        <div class="result">
-            <div class="content">
-                恭喜你成功<br/>
-                可以到大草皮逛逛學程博覽會<br/>
-                抽大獎呦~
+    <div id="display">
+        <div class="pk_div" v-if="score>=60">
+            <div class="result_div">
+                <img id="result_role" src="images/bear_fail.png" />
+                <img id="result_floor" src="images/floor.png" />
             </div>
+            <img id="bear_blood" src="images/bear_hp0.png" />
+            <img id="my_blood" src="images/pika_hp100.png" />
         </div>
-    </section>
+        <div class="pk_div" v-if="score <60 ">
+            <div class="result_div">
+                <img v-if=" role=='miao' " id="result_role" src="images/miao_fail.png" />
+                <img v-if=" role=='pika' " id="result_role" src="images/pika_fail.png" />
+                <img id="result_floor" src="images/floor.png" />
+            </div>
+            <!-- <img id="bear_blood" src="images/miao_hp0.png" /> -->
+            <img v-if=" role=='miao' " id="my_blood" src="images/miao_hp0.png" />
+            <img v-if=" role=='pika' " id="my_blood" src="images/pika_hp0.png" />
+        </div>
+        <section>
+            <div class="result">
+                <div class="content">
+                    <span v-if=" score < 60">{{message_role}}， </span>
+                    {{message_student}}
+                    <br>
+                    {{message}}
+                </div>
+            </div>
+        </section>
+    </div>
+
 </body>
+<script>
+    var strUrl = location.search;
+    var getPara, ParaVal;
+    var aryPara = [];
+
+    window.onload = function () {
+
+        vm.display();
+    }
+    var vm = new Vue({
+        el: '#display',
+        data: {
+            role: "",
+            score: "",
+            message: "",
+            id_student: "",
+            message_student: "",
+            message_role: "",
+        },
+        methods: {
+            display: function () {
+                var getjson = JSON.parse(getURL());
+                this.role = getjson.role;
+                this.score = getjson.score;
+                this.id_student = getjson.id_student;
+                this.message_student = "學號：" + this.id_student + "同學";
+
+                if (this.role == "pika") {
+                    this.message_role = "痞卡丘已失去戰鬥能力";
+                } else {
+                    this.message_role = "喵蛙種子已失去戰鬥能力"
+                }
+                switch (this.score) {
+                    case "0": this.message = "  加油！你的斜槓指數為 0 建議您可以去 10/31 大草坪的學程博覽會多多了解學程。參加闖關後，可抽 APPLE WATCH 哦！"
+                        break;
+                    case "50": this.message = "   太可惜了！你的斜槓分數為 50 就差一點，可以再加油！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "60": this.message = "   再加油喔！你的斜槓分數為 60 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "70": this.message = "   真可惜～差一點！你的斜槓分數為 70 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "80": this.message = "   真可惜～差一點！你的斜槓分數為 80 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "90": this.message = "   再接再厲！你的斜槓分數為 90 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    case "100": this.message = "   再接再厲！你的斜槓分數為 100 同學太優秀了！憑此畫面去 10/31 大草坪的學程博覽會多多了解學程課程參加闖關後，可抽 APPLE WATCH 喔！"
+                        break;
+                    default: this.message = ""
+                }
+            }
+        }
+    })
+
+    function getURL() {
+        id_student = "";
+        if (strUrl.indexOf("?") != -1) {
+            var getSearch = strUrl.split("?");
+            getPara = getSearch[1].split("&");
+            for (i = 0; i < getPara.length; i++) {
+                ParaVal = getPara[i].split("=");
+                aryPara.push(ParaVal[0]);
+                aryPara[ParaVal[0]] = ParaVal[1];
+            }
+        }
+        pos = {
+            role: aryPara['role'],
+            score: aryPara['score'],
+            id_student: aryPara['id_student']
+        };
+        return JSON.stringify(pos);
+    }
+
+</script>
+
 </html>
