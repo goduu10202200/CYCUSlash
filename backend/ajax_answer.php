@@ -22,8 +22,8 @@ include 'DBConnection.php';
         } else {
             echo "0 results";
         }
-        $sql = "INSERT INTO answer (question_id, answer,username,created_at)
-                    VALUES ('".$id_question."','".$id_answer."','".$id_student."','".$today."')";
+        $sql = "INSERT INTO answer (question_id, answer,other,username,created_at)
+                    VALUES ('".$id_question."','".$id_answer."','".$other."','".$id_student."','".$today."')";
  
         if ($conn->query($sql) === true) {
             echo "New record created successfully";

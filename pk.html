@@ -1,3 +1,34 @@
+<!-- 
+                            _ooOoo_
+                           o8888888o
+                           88" . "88
+                           (| -_- |)
+                            O\ = /O
+                        ____/`---'\____
+                      .   ' \\| |// `.
+                       / \\||| : |||// \
+                     / _||||| -:- |||||- \
+                       | | \\\ - /// | |
+                     | \_| ''\---/'' | |
+                      \ .-\__ `-` ___/-. /
+                   ___`. .' /--.--\ `. . __
+                ."" '< `.___\_<|>_/___.' >'"".
+               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+                 \ \ `-. \_ __\ /__ _/ .-` / /
+         ======`-.____`-.___\_____/___.-`____.-'======
+                            `=---='
+
+         .............................................
+                  佛祖鎮樓                  沒有BUG
+          佛曰:
+                  程序人員寫程序，又拿程序換酒錢。
+                  酒醒只在網上坐，酒醉還來網下眠；
+                  酒醉酒醒日復日，網上網下年復年。
+                  但願老死電腦間，不願鞠躬老闆前；
+                  奔馳寶馬貴者趣，公交自行程序員。
+                  別人笑我忒瘋癲，我笑自己命太賤；
+                  不見滿街漂亮妹，哪個歸得程序員？
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,10 +40,9 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/pk.css">
-    <script src="question.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!--生產版本-->
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/question.js"></script>
 </head>
 <script>
 
@@ -129,6 +159,7 @@
         </section>
     </div>
 </body>
+<script src="js/cycuslash.js"></script>
 <script>
     var myJson, JSONdata
     var strUrl = location.search;
@@ -171,39 +202,17 @@
                         './result.html?score=' + this.score + "&id_student=" + this.id_student + "&role=" + this.role;
                 } else if ((item == "其他" && repeat == 1) || item != "其他") {
                     this.seen = false;
-                    SendDataAJAX(id_question, id_answer, this.other, this.id_student, "");
+                    SendDataAJAX_pk(id_question, id_answer, this.other, this.id_student, "");
                 }
                 if (repeat == 1) {
                     this.seen = false;
                     this.other = "";
                 }
-            },
+
+            }
         }
     })
-    //SendDataAjax
-    function SendDataAJAX(id_question, id_answer, other, id_student, score) {
-        axios({
-            method: 'post',
-            url: 'backend/ajax_answer.php',
-            data: {
-                score: score,
-                other: other,
-                id_answer: id_answer,
-                id_student: id_student,
-                id_question: id_question,
-            }
-        })
-            .then(function (response) {
-                if (response.data == "no student id") {
-                    alert("請輸入學號，跳轉到登入頁面");
-                    window.location.href = './enter.html';
-                }
-                //console.log(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+
 
 
     function getURL() {

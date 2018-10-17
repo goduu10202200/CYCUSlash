@@ -1,3 +1,34 @@
+<!-- 
+                            _ooOoo_
+                           o8888888o
+                           88" . "88
+                           (| -_- |)
+                            O\ = /O
+                        ____/`---'\____
+                      .   ' \\| |// `.
+                       / \\||| : |||// \
+                     / _||||| -:- |||||- \
+                       | | \\\ - /// | |
+                     | \_| ''\---/'' | |
+                      \ .-\__ `-` ___/-. /
+                   ___`. .' /--.--\ `. . __
+                ."" '< `.___\_<|>_/___.' >'"".
+               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+                 \ \ `-. \_ __\ /__ _/ .-` / /
+         ======`-.____`-.___\_____/___.-`____.-'======
+                            `=---='
+
+         .............................................
+                  佛祖鎮樓                  沒有BUG
+          佛曰:
+                  程序人員寫程序，又拿程序換酒錢。
+                  酒醒只在網上坐，酒醉還來網下眠；
+                  酒醉酒醒日復日，網上網下年復年。
+                  但願老死電腦間，不願鞠躬老闆前；
+                  奔馳寶馬貴者趣，公交自行程序員。
+                  別人笑我忒瘋癲，我笑自己命太賤；
+                  不見滿街漂亮妹，哪個歸得程序員？
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,19 +39,9 @@
     <title>enter</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/enter.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!--生產版本-->
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <style>
-        input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none !important;
-  margin: 0; 
-}
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-    </style>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+
 </head>
 
 <body>
@@ -34,55 +55,39 @@ input[type="number"] {
         <div class="enter_div">
             <div>
                 <a>系級：</a>
-                <input type="text" v-model="myclass" autofocus />
+                <input type="text" v-model="myclass" autofocus required="required" />
             </div>
             <div>
                 <a>姓名：</a>
-                <input type="text" v-model="name" autofocus />
+                <input type="text" v-model="name" required="required" />
             </div>
             <div>
                 <a>學號：</a>
-                <input type="number" v-model="id_student" autofocus />
+                <input type="number" v-model="id_student" required="required" />
             </div>
         </div>
         <input type="button" class="go_btn" value="開始冒險！" v-on:click="login()" />
     </section>
 </body>
+<script src="js/cycuslash.js"></script>
 <script>
     var vm = new Vue({
-        el: '#login',
+        el: "#login",
         data: {
             myclass: "",
             name: "",
-            id_student: "",
+            id_student: ""
         },
         methods: {
             login: function () {
-                sessionStorage.setItem('id_student', this.id_student);
+                sessionStorage.setItem("id_student", this.id_student);
                 // window.sessionStorage["id_student"] = this.id_student;
-                SendDataAJAX(this.myclass, this.name, this.id_student);
-                window.location.href = './role.html';
-            },
-        }
-    })
-    //SendDataAjax
-    function SendDataAJAX(myclass, name, id_student) {
-        axios({
-            method: 'post',
-            url: 'backend/ajax_login.php',
-            data: {
-                name: name,
-                myclass: myclass,
-                id_student: id_student,
+                SendDataAJAX_enter(this.myclass, this.name, this.id_student);
+                window.location.href = "./role.html";
             }
-        })
-            .then(function (response) {
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+        }
+    });
+
 </script>
 
 </html>

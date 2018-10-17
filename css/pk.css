@@ -4,6 +4,7 @@ html, body{
 #showdata{
     width: 100%;
     height: 100%;
+    display: table;
 }
 .pk_div{
     width: 100%;
@@ -91,7 +92,6 @@ html, body{
 
 #bear_blood{
     width: 35%;
-    min-width: 400px;
     position: absolute;
     top: 20px;
     left: 30px;
@@ -99,7 +99,6 @@ html, body{
 }
 #my_blood{
     width: 35%;
-    min-width: 400px;
     position: absolute;
     bottom: 20px;
     right: 30px;
@@ -470,12 +469,12 @@ section .action td:hover::before{
     }
 
     #bear_blood{
-        width: 50%;
+        width: 55%;
         top: 30px;
         left: 40px;
     }
     #my_blood{
-        width: 50%;
+        width: 55%;
         bottom: 30px;
         right: 40px;
     }
@@ -506,9 +505,20 @@ section .action td:hover::before{
         width: 85%;
         font-size: 30px;
     }
+    section .option tr{
+        width: 100% !important;
+        height: 20%;
+    }
     section .option td{
-        vertical-align: text-top;
-        padding-top: 10px;
+        padding-left: 10px; 
+    }
+    .other_text input{
+        width: 79%;
+    }
+    .other_text button{
+        width: 20%;
+        font-size: 24px;
+        line-height: 40px;
     }
 
     section .action{
@@ -518,7 +528,8 @@ section .action td:hover::before{
         overflow: hidden;
     }
     section .action .content{
-        font-size: 30px;
+        font-size: 34px;
+        padding-top: 10%;
     }
     section .action table{
         margin: auto;
@@ -538,8 +549,8 @@ section .action td:hover::before{
     /* 跳出視窗 */
     #dialog .dialog_box{
         width: 500px;
-        height: 120px;
-        padding: 100px 10px;
+        height: 300px;
+        padding: 80px 10px;
     }
     .dialog_box #dialog_content{
         line-height:60px;
@@ -562,7 +573,7 @@ section .action td:hover::before{
 
 @media only screen and (min-width: 421px) and (max-width: 768px) {
     .pk_div{
-        height: calc( 100% - 320px);
+        height: calc( 100% - 370px);
         min-height: 400px;
         margin-top: 120px;
     }
@@ -571,7 +582,7 @@ section .action td:hover::before{
         height: 50%;
     }
     .pk_my #my_role{
-        width: 500px;
+        width: 450px;
         left: -120px;
         bottom: -200px;
         z-index: 1;
@@ -613,14 +624,165 @@ section .action td:hover::before{
     }
 
     #bear_blood{
-        width: 50%;
+        width: 55%;
         top: 20px;
         left: 30px;
     }
     #my_blood{
-        width: 50%;
+        width: 55%;
         bottom: 20px;
         right: 30px;
+    }
+
+    section{
+        height: 250px;
+    }
+    section .depiction .content{
+        padding-top: 10px;
+        padding-left: 3%;
+        font-size: 26px;
+    }
+
+    section .question{
+        width: 100%;
+        height: 120px;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    section .question .content{
+        padding-left: 30px;
+        padding-top: 20px;
+        font-size: 30px;
+    }
+
+    section .option{
+        width: 82%;
+        font-size: 26px;
+    }
+    section .option tr{
+        width: 100% !important;
+        height: 20%;
+    }
+    section .option td{
+        padding-left: 10px; 
+    }
+    .other_text input{
+        width: 79%;
+    }
+    .other_text button{
+        width: 20%;
+        font-size: 24px;
+        line-height: 40px;
+    }
+
+    section .action{
+        min-width: 18%;
+        border-radius: 0 8px 8px 0;
+        float: right;
+        overflow: hidden;
+    }
+    section .action .content{
+        font-size: 28px;
+    }
+    section .action table{
+        margin: auto;
+        padding-top: 5%;
+        width: 70%;
+        height: 100%;
+    }
+    section .action tr{
+        height: 25%;
+    }
+    section .action td{
+        width: 100%;
+        display: block;
+    }
+
+
+    /* 跳出視窗 */
+    #dialog .dialog_box{
+        width: 500px;
+        height: 300px;
+        padding: 80px 10px;
+    }
+    .dialog_box #dialog_content{
+        line-height:60px;
+        font-size:30px;
+    }
+    .dialog_close{
+        margin:5%;
+        width: 40px;
+        height: 40px;
+        background-size:40px;
+    }
+    #btn_dialog{
+        width:90%;
+        padding:10px 0;
+        font-size: 26px;
+    }
+}
+@media only screen and (min-width: 0px) and (max-width: 420px){
+    .pk_div{
+        height: calc( 100% - 320px);
+        min-height: 400px;
+        margin-top: 120px;
+    }
+    .pk_my{
+        width: 100%;
+        height: 50%;
+    }
+    .pk_my #my_role{
+        width: 300px;
+        left: -120px;
+        bottom: -200px;
+        z-index: 1;
+    }
+    .pk_my #my_floor{
+        width: 750px;
+        left: -120px;
+        bottom: -100px;
+    }
+    @keyframes my_pk_start
+    {
+        0%   {left:-300px;}
+        100% {left:-120px;}
+    }
+
+    .pk_bear{
+        width: 100%;
+        height: 50%;
+    }
+    .pk_bear #bear_role{
+        width: 250px;
+        top: 70px;
+        right: 80px;
+    }
+    .pk_bear #bear_floor{
+        width: 550px;
+        top: 320px;
+        right: -100px;
+    }
+    @keyframes bear_pk_start
+    {
+        0%   {right: -200px;}
+        100% {right: 80px;}
+    }
+    @keyframes bear_floor_pk_start
+    {
+        0%   {right: -300px;}
+        100% {right: -100px;}
+    }
+
+    #bear_blood{
+        width: 60%;
+        top: 10px;
+        left: 10px;
+    }
+    #my_blood{
+        width: 60%;
+        bottom: 10px;
+        right: 10px;
     }
 
     section{
@@ -642,16 +804,27 @@ section .action td:hover::before{
     section .question .content{
         padding-left: 30px;
         padding-top: 20px;
-        font-size: 26px;
+        font-size: 30px;
     }
 
     section .option{
         width: 82%;
-        font-size: 22px;
+        font-size: 26px;
+    }
+    section .option tr{
+        width: 100% !important;
+        height: 20%;
     }
     section .option td{
-        vertical-align: text-top;
-        padding-top: 10px;
+        padding-left: 10px; 
+    }
+    .other_text input{
+        width: 79%;
+    }
+    .other_text button{
+        width: 20%;
+        font-size: 24px;
+        line-height: 40px;
     }
 
     section .action{
@@ -661,7 +834,7 @@ section .action td:hover::before{
         overflow: hidden;
     }
     section .action .content{
-        font-size: 22px;
+        font-size: 28px;
     }
     section .action table{
         margin: auto;
@@ -681,8 +854,8 @@ section .action td:hover::before{
     /* 跳出視窗 */
     #dialog .dialog_box{
         width: 500px;
-        height: 120px;
-        padding: 100px 10px;
+        height: 300px;
+        padding: 80px 10px;
     }
     .dialog_box #dialog_content{
         line-height:60px;
@@ -698,29 +871,6 @@ section .action td:hover::before{
         width:90%;
         padding:10px 0;
         font-size: 26px;
-    }
-}
-@media only screen and (min-width: 0px) and (max-width: 420px){
-    .role_div{
-        height: calc( 100% - 120px);
-    }
-    .role_1, .role_2{
-        width: 100%;
-        height: 50%;
-        padding: 12%;
-        text-align: center;
-    }
-    .role_div img{
-        width: auto;
-        height: 100%;
-    }
-    
-    section{
-        height: 120px;
-    }
-    section .content{
-        padding-top: 30px;
-        font-size: 22px;
     }
 
 }
