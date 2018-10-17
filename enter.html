@@ -81,7 +81,6 @@
         methods: {
             login: function () {
                 sessionStorage.setItem("id_student", this.id_student);
-                // window.sessionStorage["id_student"] = this.id_student;
                 SendDataAJAX_enter(this.myclass, this.name, this.id_student);
                 window.location.href = "./role.html";
             }

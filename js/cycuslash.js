@@ -16,7 +16,7 @@ function SendDataAJAX_pk(id_question, id_answer, other, id_student, score) {
         alert("請輸入學號，跳轉到登入頁面");
         window.location.href = "./enter.html";
       }
-      //console.log(response.data);
+      console.log(response.data);
     })
     .catch(function(error) {
       console.log(error);

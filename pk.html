@@ -189,14 +189,14 @@
         methods: {
             reply: function (id_question, id_answer, item, repeat) {
                 /*
-                    SendDataAJAX    => Use axios send data to php files.
-                    getNextData         =>  get next question、question.id、answer in question.js
+                    SendDataAJAX_pk    => Use axios send data to php files.
+                    getNextData                =>  get next question、question.id、answer in question.js
                 */
 
                 getNextData(vm, id_question, id_answer, item, repeat);
                 if (this.finish == true) {
                     sessionStorage.clear();
-                    SendDataAJAX(id_question, id_answer, this.other, this.id_student, this.score);
+                    SendDataAJAX_pk(id_question, id_answer, this.other, this.id_student, this.score);
                     //Change page
                     window.location.href =
                         './result.html?score=' + this.score + "&id_student=" + this.id_student + "&role=" + this.role;
@@ -208,12 +208,9 @@
                     this.seen = false;
                     this.other = "";
                 }
-
             }
         }
     })
-
-
 
     function getURL() {
         if (strUrl.indexOf("?") != -1) {
